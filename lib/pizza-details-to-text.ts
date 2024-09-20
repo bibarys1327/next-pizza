@@ -1,25 +1,29 @@
 const mapSize = {
-  20: 'Маленькая',
-  30: 'Средняя',
-  40: 'Большая',
+  20: "Маленькая",
+  30: "Средняя",
+  40: "Большая",
 } as const;
 
 const mapType = {
-  1: 'традиционное',
-  2: 'тонкое',
+  1: "традиционное",
+  2: "тонкое",
 } as const;
 
 export type PizzaSizeItem = { value: string; name: string; disabled?: boolean };
 
-export const pizzaSizes = Object.entries(mapSize).map<PizzaSizeItem>(([value, name]) => ({
-  value,
-  name,
-}));
+export const pizzaSizes = Object.entries(mapSize).map<PizzaSizeItem>(
+  ([value, name]) => ({
+    value,
+    name,
+  })
+);
 
-export const pizzaTypes = Object.entries(mapType).map<PizzaSizeItem>(([value, name]) => ({
-  value,
-  name,
-}));
+export const pizzaTypes = Object.entries(mapType).map<PizzaSizeItem>(
+  ([value, name]) => ({
+    value,
+    name,
+  })
+);
 
 export type PizzaSize = keyof typeof mapSize;
 export type PizzaType = keyof typeof mapType;

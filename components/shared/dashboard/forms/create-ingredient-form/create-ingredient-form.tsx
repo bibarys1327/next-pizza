@@ -1,32 +1,21 @@
 "use client";
 
-import React from "react";
-import { useForm, SubmitHandler, FormProvider } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import React from "react";
+import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 
-import { FormInput } from "@/components/shared/form/form-input";
-import { useRouter, useParams } from "next/navigation";
-import {
-  createIngredient,
-  createProduct,
-  createUser,
-  updateIngredient,
-  updateProduct,
-  updateUser,
-} from "@/app/actions";
-import toast from "react-hot-toast";
-import { DashboardFormHeader } from "../../dashboard-form-header";
-import {
-  CreateProductFormSchema,
-  CreateProductFormValues,
-} from "@/components/shared/dashboard/forms/create-product-form/constants";
-import { Ingredient, Product } from "@prisma/client";
-import { Trash2 } from "lucide-react";
-import { UploadButton } from "@/lib/uploadthing";
+import { createIngredient, updateIngredient } from "@/app/actions";
 import {
   CreateIngredientFormSchema,
   CreateIngredientFormValues,
 } from "@/components/shared/dashboard/forms/create-ingredient-form/constants";
+import { FormInput } from "@/components/shared/form/form-input";
+import { UploadButton } from "@/lib/uploadthing";
+import { Ingredient } from "@prisma/client";
+import { Trash2 } from "lucide-react";
+import { useParams, useRouter } from "next/navigation";
+import toast from "react-hot-toast";
+import { DashboardFormHeader } from "../../dashboard-form-header";
 
 interface Props {
   values?: Ingredient;
@@ -51,7 +40,8 @@ export const CreateIngredientForm: React.FC<Props> = ({ values }) => {
       setLoading(true);
 
       const fields = {
-        ...data,
+        name: data.name,
+        imageUrl: data.imageUrl ?? "",
         price: Number(data.price),
       };
 

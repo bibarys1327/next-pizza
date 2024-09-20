@@ -1,7 +1,7 @@
-import React from 'react';
-import toast from 'react-hot-toast';
-import { useSet } from 'react-use';
-import { Ingredient, Product, ProductItem } from '@prisma/client';
+import { Ingredient, Product, ProductItem } from "@prisma/client";
+import React from "react";
+import toast from "react-hot-toast";
+import { useSet } from "react-use";
 
 import {
   PizzaSize,
@@ -9,20 +9,28 @@ import {
   PizzaType,
   pizzaDetailsToText,
   pizzaSizes,
-} from '@/lib/pizza-details-to-text';
-import { useCart } from './use-cart';
+} from "@/lib/pizza-details-to-text";
+import { useCart } from "./use-cart";
 
-export type IProduct = Product & { items: ProductItem[]; ingredients: Ingredient[] };
+export type IProduct = Product & {
+  items: ProductItem[];
+  ingredients: Ingredient[];
+};
 
-export const useChoosePizza = (items?: IProduct['items']) => {
-  const [selectedIngredientsIds, { toggle: toggleAddIngredient }] = useSet<number>(new Set([]));
+export const useChoosePizza = (items?: IProduct["items"]) => {
+  const [selectedIngredientsIds, { toggle: toggleAddIngredient }] =
+    useSet<number>(new Set([]));
   const { addCartItem, loading } = useCart();
 
   const [size, setSize] = React.useState<PizzaSize>(20);
   const [type, setType] = React.useState<PizzaType>(1);
 
-  const activeSizes = items?.filter((item) => item.pizzaType === type).map((item) => item.size);
-  const productItem = items?.find((item) => item.pizzaType === type && item.size === Number(size));
+  const activeSizes = items
+    ?.filter((item) => item.pizzaType === type)
+    .map((item) => item.size);
+  const productItem = items?.find(
+    (item) => item.pizzaType === type && item.size === Number(size)
+  );
 
   const isActiveSize = (value: number | string) => {
     return activeSizes?.some((activeSize) => activeSize === Number(value));
@@ -52,10 +60,10 @@ export const useChoosePizza = (items?: IProduct['items']) => {
           ingredientsIds: Array.from(selectedIngredientsIds),
           quantity: 1,
         });
-        toast.success('Товар добавлен в корзину');
+        toast.success("Товар добавлен в корзину");
       } catch (error) {
         console.error(error);
-        toast.error('Произошла ошибка при добавлении в корзину');
+        toast.error("Произошла ошибка при добавлении в корзину");
       }
     }
   };
