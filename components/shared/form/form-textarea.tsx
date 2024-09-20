@@ -1,7 +1,9 @@
-import React from 'react';
-import { useFormContext } from 'react-hook-form';
-import { X } from 'lucide-react';
-import { Textarea } from '@/components/ui/textarea';
+"use client";
+
+import { Textarea } from "@/components/ui/textarea";
+import { X } from "lucide-react";
+import React from "react";
+import { useFormContext } from "react-hook-form";
 
 interface Props extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   className?: string;
@@ -10,7 +12,13 @@ interface Props extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   required?: boolean;
 }
 
-export const FormTextarea: React.FC<Props> = ({ className, name, label, required, ...props }) => {
+export const FormTextarea: React.FC<Props> = ({
+  className,
+  name,
+  label,
+  required,
+  ...props
+}) => {
   const {
     register,
     formState: { errors },
@@ -23,7 +31,7 @@ export const FormTextarea: React.FC<Props> = ({ className, name, label, required
   const text = watch(name);
 
   const onClickClear = () => {
-    setValue(name, '');
+    setValue(name, "");
   };
 
   return (
@@ -36,7 +44,8 @@ export const FormTextarea: React.FC<Props> = ({ className, name, label, required
         {Boolean(text) && (
           <button
             onClick={onClickClear}
-            className="absolute right-4 top-7 -translate-y-1/2 opacity-30 hover:opacity-100 cursor-pointer">
+            className="absolute right-4 top-7 -translate-y-1/2 opacity-30 hover:opacity-100 cursor-pointer"
+          >
             <X className="h-5 w-5" />
           </button>
         )}

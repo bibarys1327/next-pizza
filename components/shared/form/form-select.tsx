@@ -1,9 +1,17 @@
-import React from 'react';
-import { Controller, useFormContext } from 'react-hook-form';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../ui/select';
-import { SelectProps } from '@radix-ui/react-select';
-import { RequiredSymbol } from '../required-symbol';
-import { ErrorText } from '../error-text';
+"use client";
+
+import { SelectProps } from "@radix-ui/react-select";
+import React from "react";
+import { Controller, useFormContext } from "react-hook-form";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../../ui/select";
+import { ErrorText } from "../error-text";
+import { RequiredSymbol } from "../required-symbol";
 
 type SelectItem = {
   value: string;
@@ -43,7 +51,11 @@ export const FormSelect: React.FC<Props> = ({
             {label} {required && <RequiredSymbol />}
           </p>
 
-          <Select onValueChange={field.onChange} defaultValue={field.value} {...props}>
+          <Select
+            onValueChange={field.onChange}
+            defaultValue={field.value}
+            {...props}
+          >
             <SelectTrigger className="h-12">
               <SelectValue placeholder={placeholder} />
             </SelectTrigger>
